@@ -46,13 +46,13 @@ public class invert
             SelectObject(hdc, brush); // Select the brush into the DC
 
             // Perform a drawing operation (invert the screen)
-            PatBlt(hdc, 0, 0, x, y, PATINVERT); // This covers the full screen
+            PatBlt(hdc, 0, 0, x, y, PATINVERT);
 
             // Clean up resources
             DeleteObject(brush);
             DeleteDC(hdc);
 
-            // Sleep for 0,5 second before repeating (this value can be changed to any time, e.g. 1 second = 1000)
+            // Sleep for 0,5 second before repeating (this value can be changed to any time)
             Thread.Sleep(500);
         }
     }
