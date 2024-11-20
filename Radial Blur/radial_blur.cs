@@ -72,7 +72,7 @@ namespace radial_blur
                     IntPtr mhdc = CreateCompatibleDC(hdc);
                     IntPtr hbit = CreateCompatibleBitmap(hdc, x, y);
                     IntPtr holdbit = SelectObject(mhdc, hbit);
-                    // Randomize the triangle points for `PlgBlt`
+                    // Randomize the points for `PlgBlt`
                     if (r.Next(2) == 1)
                     {
                         lppoint[0].X = (left + 30) + 0;
