@@ -13,7 +13,7 @@ namespace tunnel_effect
     public class tunnel_effect
     {
 
-        // Import necessary WinAPI functions
+        // Import GDI functions
         [DllImport("user32.dll")]
         public static extern IntPtr GetDC(IntPtr hWnd);
 
@@ -32,7 +32,7 @@ namespace tunnel_effect
         [DllImport("gdi32.dll")]
         public static extern bool DeleteDC(IntPtr hdc);
 
-        // Define the POINT structure for PlgBlt
+        // Structures for GDI functions
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
@@ -43,36 +43,34 @@ namespace tunnel_effect
         
         public static void Main()
         {
+            // Random for generating effects
             Random r;
-            // Get the screen width and height
             int x = Screen.PrimaryScreen.Bounds.Width, y = Screen.PrimaryScreen.Bounds.Height;
             int left = Screen.PrimaryScreen.Bounds.Left, right = Screen.PrimaryScreen.Bounds.Right, 
                 top = Screen.PrimaryScreen.Bounds.Top, bottom = Screen.PrimaryScreen.Bounds.Bottom;
             uint[] rndclr = { 0xF0FFFF };
-            // Create an array for the points that will define the screen polygon
             POINT[] lppoint = new POINT[3];
-            // Infinite loop to create the tunnel effect
             while (true)
             {
                 r = new Random();
-
-                IntPtr hdc = GetDC(IntPtr.Zero); // Get the device context for the screen
-                IntPtr mhdc = CreateCompatibleDC(hdc); // Create a memory device context
-                IntPtr hbit = CreateCompatibleBitmap(hdc, x, y); // Create a compatible bitmap
-                IntPtr holdbit = SelectObject(mhdc, hbit); // Select the bitmap into the memory DC
-                // Set the points for the tunnel effect
+            // Set up the device context
+                IntPtr hdc = GetDC(IntPtr.Zero); 
+                IntPtr mhdc = CreateCompatibleDC(hdc); 
+                IntPtr hbit = CreateCompatibleBitmap(hdc, x, y); 
+                IntPtr holdbit = SelectObject(mhdc, hbit); 
+                // Randomize the points for `PlgBlt`
                 lppoint[0].X = (left + 50) + 0;
                 lppoint[0].Y = (top - 50) + 0;
                 lppoint[1].X = (right + 50) + 0;
                 lppoint[1].Y = (top + 50) + 0;
                 lppoint[2].X = (left - 50) + 0;
                 lppoint[2].Y = (bottom - 50) + 0;
-                // Use PlgBlt to draw the tunnel effect
+                // Perform GDI operations
                 PlgBlt(hdc, lppoint, hdc, left - 20, top - 20, (right - left) + 40, (bottom - top) + 40, 
                     IntPtr.Zero, 0, 0);
-                // Clean up
+                // Cleanup GDI objects
                 DeleteDC(hdc);
-                // Sleep for 50 milliseconds (this value can be changed to any time)
+                // Delay to control animation speed (this value can be changed to any time)
                 Thread.Sleep(50);
 
             }
