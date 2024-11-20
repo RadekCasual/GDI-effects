@@ -73,7 +73,7 @@ class blur_effect
             DeleteDC(mhdc);
             DeleteDC(hdc);
 
-            // Delay for 50 milliseconds (this value can be changed to any time)
+            // Delay to control animation speed for 50 milliseconds (this value can be changed to any time)
             Thread.Sleep(50);
         }
     }
