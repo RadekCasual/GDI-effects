@@ -10,7 +10,7 @@ public class inverted_colors
     const int SRCCOPY = 0x00CC0020;
     const int PATINVERT = 0x005A0049;
 
-    // P/Invoke declarations for GDI functions
+    // Import GDI functions
     [DllImport("user32.dll")]
     public static extern IntPtr GetDC(IntPtr hWnd);
 
@@ -34,13 +34,14 @@ public class inverted_colors
 
     public static void Main()
     {
+        //Random for generating effects
         Random r = new Random();
         int x = Screen.PrimaryScreen.Bounds.Width, y = Screen.PrimaryScreen.Bounds.Height;
         uint[] rndclr = { 0xF0FFFF }; // Light cyan color (can be changed to any hexadecimal color)
 
-        // Infinite loop to simulate fullscreen
         while (true)
         {
+            // Set up the device context
             IntPtr hdc = GetDC(IntPtr.Zero); // Get screen DC
             IntPtr brush = CreateSolidBrush(rndclr[r.Next(rndclr.Length)]); // Create a random color brush
             SelectObject(hdc, brush); // Select the brush into the DC
@@ -52,7 +53,7 @@ public class inverted_colors
             DeleteObject(brush);
             DeleteDC(hdc);
 
-            // Sleep for 0,5 second before repeating (this value can be changed to any time)
+            // Delay to control animation speed (this value can be changed to any time)
             Thread.Sleep(500);
         }
     }
