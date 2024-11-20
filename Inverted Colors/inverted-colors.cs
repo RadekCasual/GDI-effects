@@ -42,9 +42,9 @@ public class inverted_colors
         while (true)
         {
             // Set up the device context
-            IntPtr hdc = GetDC(IntPtr.Zero); // Get screen DC
-            IntPtr brush = CreateSolidBrush(rndclr[r.Next(rndclr.Length)]); // Create a random color brush
-            SelectObject(hdc, brush); // Select the brush into the DC
+            IntPtr hdc = GetDC(IntPtr.Zero); 
+            IntPtr brush = CreateSolidBrush(rndclr[r.Next(rndclr.Length)]); 
+            SelectObject(hdc, brush); 
 
             // Perform a drawing operation (invert the screen)
             PatBlt(hdc, 0, 0, x, y, PATINVERT);
