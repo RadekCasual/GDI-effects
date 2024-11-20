@@ -55,9 +55,9 @@ class blur_effect
         while (true)
         {
             // Set up the device context
-            IntPtr hdc = GetDC(IntPtr.Zero); // Get the screen DC
+            IntPtr hdc = GetDC(IntPtr.Zero); 
             IntPtr mhdc = CreateCompatibleDC(hdc);
-            IntPtr hbit = CreateCompatibleBitmap(hdc, x, y); // Create a bitmap
+            IntPtr hbit = CreateCompatibleBitmap(hdc, x, y); 
             IntPtr holdbit = SelectObject(mhdc, hbit);
 
             // Copy screen into memory device context
