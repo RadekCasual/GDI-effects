@@ -37,7 +37,7 @@ public class inverted_colors
         //Random for generating effects
         Random r = new Random();
         int x = Screen.PrimaryScreen.Bounds.Width, y = Screen.PrimaryScreen.Bounds.Height;
-        uint[] rndclr = { 0xF0FFFF }; // Light cyan color (can be changed to any hexadecimal color)
+        uint[] rndclr = { 0xF0FFFF }; 
 
         while (true)
         {
